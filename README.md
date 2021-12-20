@@ -2,13 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Dans la racine du projet ->
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Tout d'abord installer yarn : yarn install
+
+Ensuite : yarn upgrade
+
+Maintenant que yarn est les dépendances de nextJS sont installé, on lance le serveur : yarn dev
+
+-----------
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
