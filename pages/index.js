@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
     <div className='bg-red'>
+      <p className='text-center'>salut les putes</p>
     </div>
   )
 }
