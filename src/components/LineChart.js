@@ -1,88 +1,72 @@
-import { Component, useState, useEffect } from 'react'
-import range from 'lodash/range'
-import last from 'lodash/last'
-import { storiesOf } from '@storybook/react'
-import { withKnobs, boolean, select } from '@storybook/addon-knobs'
-import { generateDrinkStats } from '@nivo/generators'
-import { Defs, linearGradientDef } from '@nivo/core'
-import { area, curveMonotoneX } from 'd3-shape'
-import * as time from 'd3-time'
-import { timeFormat } from 'd3-time-format'
-import { Line } from '../src'
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-const commonProperties = {
-    width: 900,
-    height: 400,
-    margin: { top: 20, right: 20, bottom: 60, left: 80 },
-     data,
-     animate: true,
-    enableSlices: 'x',
- };
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
- const CustomSymbol = ({ size, color, borderWidth, borderColor }) => (
-    <g>
-        <circle fill="#fff" r={size / 2} strokeWidth={borderWidth} stroke={borderColor} />
-        <circle
-           r={size / 5}
-           strokeWidth={borderWidth}
-             stroke={borderColor}
-            fill={color}
-            fillOpacity={0.35}
-         />
-     </g>
-)
- 
-const stories = storiesOf('Line', module)
+const Home = () => {
+  const data = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        label: "First dataset",
+        data: [33, 53, 85, 41, 44, 65],
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)"
+      },
+      {
+        label: "Second dataset",
+        data: [33, 25, 35, 51, 54, 76],
+        fill: false,
+        borderColor: "#742774"
+      }
+    ]
+  };
 
-const curveOptions = ['linear', 'monotoneX', 'step', 'stepBefore', 'stepAfter']
- 
-stories.addDecorator(withKnobs)
+  return (
+    <>
+          <div className='bg-red h-[500px] flex flex-col rounded-xl mt-4 '>
+      <div className="flex-[2] bg-slate-500 h-full rounded-t-xl">
+        Bannière
+      </div>
+      <div className="flex-[3] bg-slate-200 h-full rounded-b-xl flex flex-row">
+        <div className=" ml-64 flex-[1] flex flex-col">
+        <h1 className="text-3xl ">Anthropophobe</h1>
+        <div className="flex flex-1">
+          <div className=" w-64"> Description du joueur
+          </div>
+          <div className=" flex-1">Carouselle des historique tournoi</div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div className=" w-48 h-48 bg-red-700 absolute top-[20%] left-48 rounded-full ">
+      <div>
+        pp 
+      </div>
+    </div>
+      <div className=" h-[500px] flex flex-1 rounded-xl mt-4 ">
+      </div>
+      <Line data={data} curve="monotoneX" />
+    </>
+  );
+}
 
- stories.add(
-     'Stacked Lines',
-     () => (
-        <Line
-    {...commonProperties}
-    data = {[
-      { x: '2018-01-01', y: 7 },
-      { x: '2018-01-02', y: 5 },
-      { x: '2018-01-03', y: 11 },
-      { x: '2018-01-04', y: 9 },
-      { x: '2018-01-05', y: 12 },
-      { x: '2018-01-06', y: 16 },
-      { x: '2018-01-07', y: 13 },
-      { x: '2018-01-08', y: 13 },
-    ]}
-    xScale={{
-      type:'time',
-      format:'%Y-%m-%d',
-      useUTC: false,
-      precision: 'day',
-    }}
-    xFormat='time:%Y-%m-%d'
-    yScale={{
-      type:'linear',
-      stacked: Boolean('stacked', false),
-    }}
-    axisLeft={{
-      format: '%b %d',
-      tickValues: 'every 2 days',
-      legend: 'time scale',
-      legendOffset: -12,
-    }}
-    curve={select('curve', curveOptions, 'monotoneX')}
-    enablePointLabel={true}
-    pointSymbol={CustomSymbol}
-    pointSize={16}
-    pointBorderWidth={1}
-    pointBorderColor={{
-      from: 'color',
-      modifiers: [['darker', 0.3]],
-    }}
-    useMesh={true}
-    enableSlices={false}
-    />
-    )
- )
-
-
+export default Home
