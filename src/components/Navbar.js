@@ -3,25 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 
-export async function getServerSideProps() {
-  const response = await fetch('http://localhost:3008/api/users/2');
-  const res = await response.json();
-
-
-  return {
-      props: {
-          res
-      },
-      revalidate: 10
-  }
-}
-
-export async function getStaticPaths() {
-  const res = await fetch()
-  const response = await res.json()
-}
-
-export const Navbar = () => {
+export function Navbar() {
   const [active, setActive] = useState(false); // Afficher le menu burger
   const router = useRouter(); // Pour connaitre la route actuel
 
@@ -95,5 +77,6 @@ export const Navbar = () => {
     </>
   );
 };
+
 
 export default Navbar
