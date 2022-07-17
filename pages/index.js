@@ -21,6 +21,7 @@ ChartJS.register(
 );
 
 const Home = () => {
+
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
@@ -39,7 +40,7 @@ const Home = () => {
       }
     ]
   };
-
+  
   return (
     <>
           <div className='bg-red h-[500px] flex flex-col rounded-xl mt-4 '>
