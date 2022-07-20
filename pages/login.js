@@ -1,21 +1,17 @@
 import LoginForm from "../src/components/LoginForm";
+//import getUsers from './api/users.js'
 import useSWR from 'swr'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-const Login = () => {
-
-    const { data, error } = useSWR('http://localhost:3008/api/users/', fetcher)
-    if (error) return <div>Failed to load</div>
-    if (!data) return <div>Loading...</div>
-
-    console.log(data.data)
+const login = () => { 
+    const fetcher = (...args) => fetch(...args).then((res) => res.json())
+    const { data, error } = useSWR('http://localhost:3008/api/users/', fetcher) 
 
     return(
         <>
-        <LoginForm users={data.data}/>
+        <LoginForm users={data ? data.data : data} />
         </>
     );
 }
 
-export default Login
+export default login

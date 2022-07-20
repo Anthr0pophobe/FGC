@@ -1,42 +1,38 @@
-import { useState } from "react"
 import { useForm } from 'react-hook-form'
-//import { isSamePassword } from '../passwordHash.js'
+import { hashValue, isSameHashValue } from '../passwordHash.js'
 
-const bcrypt = require('bcrypt')
-
-export function hashPassword(password) {
-    return bcrypt.hash(password, 10).then((passHash) => {return passHash})
-}
-export function isSamePassword(passHash, password) {
-    return bcrypt.compare(passHash, password).then((result) => {return result})
-}
 
 export const LoginForm = ({ users }) => {
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-    const onSubmit = (data) => {
-        
+
+    const onSubmit = (data) => {    
+        const passwordHash = hashValue(data.password)
+
         users.map((user) => {
-            if(user.pseudo === data.pseudo && user.password === data.password) {
-                console.log(user);
-                const a = hashPassword(user.password)
-                console.log(a)
+
+            if(user.email === data.email && isSameHashValue(user.password, passwordHash) ) {
+                console.log('trouver !!')
+                //cookieCutter.set('email', user.email, { expires: 600 })
+            } else {
+                console.log('pas trouver')
             }
         });
+        
     }
 
     return (
         <>
         <form onSubmit={handleSubmit(onSubmit)}>
-
-            <input placeholder="Pseudo" {...register("pseudo", { required: true, maxLength: 15, minLength: 4, pattern: /^[A-Za-z]+$/i })} />
-            {errors.pseudo?.type === 'required' && <div className="errorForm">Vous devez entrer un pseudo</div>}
-            {errors.pseudo?.minLength && errors.pseudo?.maxLength && errors.pseudo?.pattern && <div className="errorForm">Vous devez entrer un pseudo correctes !</div>}
+            <input placeholder="email" {...register("email", { required: true, maxLength: 255, pattern: "/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/" })} />
+            {errors.email?.type === 'required' && <div className="errorForm">Vous devez entrer votre email</div>}
+            {(errors.email?.maxLength && errors.email?.pattern) && <div className="errorForm">L'adresse email entré n'est pas valide</div>}
 
             <input type="password" placeholder="Mot de passe" {...register("password", { required: true, maxLength: 15, minLength: 8, pattern: "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" })} />
             {errors.password?.type === 'required' && <div className="errorForm">Vous devez entrer un mot de passe</div> }
-            {errors.password?.minLength && errors.password?.maxLength && errors.password?.pattern && <div className="errorForm">Vous devez entrer un mot de passe correctes !</div>}
-            
+            {(errors.password?.minLength && errors.password?.maxLength) && errors.password?.pattern && <div className="errorForm">Mot de passe compris entre 8 et 15 caractères !</div>}
+
             <input className="bg-red-400" type="submit" />
         </form>
         </>

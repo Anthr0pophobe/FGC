@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 
-export function Navbar() {
+export default function Navbar() {
   const [active, setActive] = useState(false); // Afficher le menu burger
   const router = useRouter(); // Pour connaitre la route actuel
 
@@ -77,6 +77,3 @@ export function Navbar() {
     </>
   );
 };
-
-
-export default Navbar

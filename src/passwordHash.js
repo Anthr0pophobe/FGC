@@ -1,8 +1,12 @@
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
+const salt = "$2a$10$ZZ.Ezn7uC1KwvhjDeUyhIe"
 
-export default function hashPassword(password) {
-    return bcrypt.hash(password, 10).then((passHash) => {return passHash})
+export function hashValue(password) {
+    const passwordHash = bcrypt.hashSync(password, salt)
+    return passwordHash
 }
-export default function isSamePassword(passHash, password) {
-    return bcrypt.compare(passHash, password).then((result) => {return result})
+
+export function isSameHashValue(passHash, password) {
+    return bcrypt.compareSync(password, passHash)
 }
+
