@@ -1,5 +1,4 @@
 import LoginForm from "../src/components/LoginForm";
-//import getUsers from './api/users.js'
 import useSWR from 'swr'
 
 

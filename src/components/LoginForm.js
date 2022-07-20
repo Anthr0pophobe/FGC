@@ -1,22 +1,17 @@
 import { useForm } from 'react-hook-form'
-import { hashValue, isSameHashValue } from '../passwordHash.js'
+import { isSameHashValue } from '../passwordHash.js'
 
 
 export const LoginForm = ({ users }) => {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    
 
     const onSubmit = (data) => {    
-        const passwordHash = hashValue(data.password)
 
         users.map((user) => {
-
-            if(user.email === data.email && isSameHashValue(user.password, passwordHash) ) {
+            if(user.email === data.email && isSameHashValue(user.password, data.password) ) {
                 console.log('trouver !!')
                 //cookieCutter.set('email', user.email, { expires: 600 })
-            } else {
-                console.log('pas trouver')
             }
         });
         

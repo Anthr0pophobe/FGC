@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const salt = "$2a$10$ZZ.Ezn7uC1KwvhjDeUyhIe"
+const salt = bcrypt.genSaltSync(10)
 
 export function hashValue(password) {
     const passwordHash = bcrypt.hashSync(password, salt)
