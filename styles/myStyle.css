@@ -1,16 +1,28 @@
-.color-blue {
-    --tw-bg-opacity: 1;
-    background-color: rgb(93 99 241 / var(--tw-bg-opacity));
+.bg-blue {
+    background-color: #5D63D1;
 }
-.color-light-blue {
-    --tw-bg-opacity: 1;
-    background-color: rgb(1 47 100 / var(--tw-bg-opacity));
+.bg-light-blue {
+    background-color: #0377FF;
 }
-.color-orange {
-    --tw-bg-opacity: 1;
-    background-color: rgb(247 44 5 / var(--tw-bg-opacity));
+.bg-orange {
+    background-color: #F72C05;
 }
-.color-yellow-orange {
-    --tw-bg-opacity: 1;
-    background-color: rgb(97 62 2 / var(--tw-bg-opacity));
+.bg-yellow-orange {
+    background-color: #F79E05
+}
+
+
+.text-blue {
+    color: #5D63D1;
+}
+.text-light-blue {
+    color: #0377FF;
+}
+.text-orange {
+    color: #F72C05;
+}
+
+.errorForm {
+    color: #F72C05;
+    font-size: small;
 }

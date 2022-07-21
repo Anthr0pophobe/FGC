@@ -7,14 +7,15 @@ import { getCookies } from 'cookies-next';
 
 function MyApp({ Component, pageProps }) {
 
-  const user = getCookies()
-  console.log(user)
+  const user = getCookies() ? getCookies() : 'none'
+  console.log('app -> user = ', user);
 
   // La navbar est mise ici pour qu'elle apparaisse sur toutes les pages
   return (
-    <div className='px-[10%]'>
+    <div className='px-[10%] flex flex-col h-screen justify-between'>
       <Navbar userConnected={user.pseudo} />
       <Component {...pageProps} />
+      <Footer />
     </div>
   )
 }
