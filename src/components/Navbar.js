@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react';
 import { useRouter } from 'next/router'
 
-export default function Navbar() {
+export default function Navbar({ userConnected }) {
   const [active, setActive] = useState(false); // Afficher le menu burger
   const router = useRouter(); // Pour connaitre la route actuel
 
@@ -11,7 +11,7 @@ export default function Navbar() {
     setActive(!active);
   };
 
-  console.log(router.pathname)
+  console.log(router.pathname)  
 
   return (
     <>
@@ -62,14 +62,18 @@ export default function Navbar() {
           </div>
 
           <div className='lg:ml-auto lg:mr-2'>
-            <Link href='/'>
               <a className={`${ router.pathname === '/account' || router.pathname === '/login' ? 'underline underline-offset-4 decoration-[#F79E05]' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 rounded text-white font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white`}>
-                Compte
+                {userConnected ? <Link href='/'>{userConnected}</Link>
+                 : <div>
+                    <Link href='/login'>Se connecter</Link>
+                    / 
+                    <Link href='/signup'>S'inscrire</Link>
+                  </div>}
+
                 <div className={ active ? 'hidden' : ''}>
                   <Image className='fill-current h-8 w-8 mx-4' src="/../public/logo-account.png" alt="Logo Contrast" width='60px' height='60px' />
                 </div>
               </a>
-            </Link>
           </div>
           
         </div>

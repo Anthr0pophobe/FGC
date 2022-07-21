@@ -8,6 +8,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { getCookie } from 'cookies-next';
+import Logout from '../src/components/Logout';
 
 ChartJS.register(
   CategoryScale,
@@ -19,12 +21,17 @@ ChartJS.register(
   Legend
 );
 
+import { getCookies } from 'cookies-next';
+ 
 
 const index = () => {
+
+  console.log(getCookies())
 
   return (
     <>
       <h1>Home</h1>
+      <Logout />
     </>
   );
 }
