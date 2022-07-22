@@ -1,12 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { isSameHashValue } from '../passwordHash.js'
 import Router from 'next/router'
-import { setCookie } from 'cookies-next';
+import { getCookies, setCookie } from 'cookies-next';
+import { useState } from 'react';
 
 export const LoginForm = ({ users }) => {
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+    const [notOk, setNotOk] = useState(false)
+    
     const onSubmit = (data) => {
 
         users.map((user) => {
@@ -16,7 +18,11 @@ export const LoginForm = ({ users }) => {
                 setCookie('userId', user.id)
                 Router.push('/')
             }
+            console.log('form= ',data)
+            console.log('cookies= ',getCookies())
         });
+
+        setNotOk(true)
     }
 
     return (
@@ -39,6 +45,8 @@ export const LoginForm = ({ users }) => {
                 {...register("password", { required: true, maxLength: 30, minLength: 8, pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})" })}
                 className="border-slate-300 appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
                 />
+
+                <p className={notOk ? '' : 'hidden' }>Ladresse mail ou le mot de passe est incorrect !</p>
                 
                 {errors.password?.type === 'required' && <div className="errorForm">Vous devez entrer un mot de passe !</div> }
                 {errors.password?.pattern && <div className="errorForm">Au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial</div> }
@@ -46,15 +54,14 @@ export const LoginForm = ({ users }) => {
             </div>
                         
             <div id="button" className="flex flex-col w-full my-5">
-                <button type="button" className="w-full py-4 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg" >
+                <button type="submit" className="w-full py-4 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg" >
                             <div className="flex flex-row items-center justify-center">
                                 <div className="mr-2">
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-lidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
                                     </svg>
-                                </div>
-                                
-                                <input className="font-bold" value="Se connecter" type="submit" />
+                                </div>  
+                                Se connecter
                             </div>
                 </button>
             </div>

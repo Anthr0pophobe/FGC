@@ -597,6 +597,10 @@ video {
   left: 12rem;
 }
 
+.m-5 {
+  margin: 1.25rem;
+}
+
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -922,6 +926,11 @@ video {
 .bg-red-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
 .fill-current {

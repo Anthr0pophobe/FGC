@@ -11,7 +11,7 @@ const tournois = () => {
 
     return (
         <>
-        <div className='my-5 flex flex-wrap'>
+        <div className='my-5 flex flex-wrap justify-around'>
             {tournois !== 'none' ? tournois.map((tournoi) => <Tournoi key={tournoi.id} donnees={tournoi} /> ) : <div>Il n'y a aucun tournoi en cours</div>}
         </div>
         </>

@@ -47,7 +47,7 @@ const Tournoi = ({donnees}) => {
 
     return donnees ? (
         <>
-        <article className="rounded-lg shadow-lg w-full p-4 flex flex-col justify-center items-center">
+        <article className="rounded-lg shadow-lg w-fit p-4 flex flex-col justify-center items-center m-5">
             <Link href={`/tournois/${donnees.id}`} replace>
                 <a>
                 <Image alt="Logo jeu" className="block h-auto w-full" src={donnees.nom.includes('SSBU') && "/../public/bros.png"

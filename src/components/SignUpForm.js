@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form'
 import React from 'react'
 import Router from 'next/router'
-import { setCookie } from 'cookies-next';
+import { hashValue } from '../passwordHash'
 
 
 async function createUser(data) { // A FAIRE FONCTIONNER
     
+    data.password = hashValue(data.password)
     console.log(data)
     try {
         await fetch('http://localhost:3008/api/users/create', {
@@ -19,10 +20,7 @@ async function createUser(data) { // A FAIRE FONCTIONNER
         return false
     }
 
-    setCookie('email', data.email)
-    setCookie('pseudo', data.pseudo)
-    setCookie('userId', data.id)
-    Router.push('/')
+    Router.push('/login')
 }
 
 export const SignUpForm = ({users}) => {

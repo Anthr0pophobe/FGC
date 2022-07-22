@@ -1,5 +1,6 @@
 import { getCookie } from "cookies-next";
 import useSWR from 'swr'
+import Logout from '../../src/components/Logout'
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
@@ -13,6 +14,7 @@ const ProfilDetail = () => {
     return user ? (
         <>
         <h1>{user.pseudo}</h1>
+        <Logout />
         </>
     ) : (<><h1>Loading ...</h1></>);
 }
