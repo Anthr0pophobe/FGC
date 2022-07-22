@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import Link from 'next/link'
-import Article from '../src/components/Article'
+import Article from '../../src/components/Article'
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())

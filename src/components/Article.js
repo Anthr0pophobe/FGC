@@ -22,7 +22,7 @@ const Article = ({donnees}) => {
     return data ? (
         <>
         <article class="rounded-lg shadow-lg w-full p-4">
-            <Link href={`/article/${donnees.id}`} replace>
+            <Link href={`/actualites/${donnees.id}`} replace>
                 <Image alt="Logo jeu" className="block h-auto w-full" src={donnees.titre.toLowerCase().includes("smash bros") && "/../public/bros.png"
                                                                             || donnees.titre.toLowerCase().includes("guilty gear") && "/../public/ggs.png"
                                                                             || donnees.titre.toLowerCase().includes("dragon ball") && "/../public/fighterz.png"} layout="intrinsic" width={donnees.titre.toLowerCase().includes("smash bros") && "100px"
@@ -34,7 +34,7 @@ const Article = ({donnees}) => {
 
             <div className="flex items-center justify-between leading-tight p-2 md:p-4">
                 <h1 className="text-lg no-underline hover:underline text-black">
-                    <Link href={`/article/${donnees.id}`} replace>
+                    <Link href={`/actualites/${donnees.id}`} replace>
                         {donnees.titre}
                     </Link>
                 </h1>
@@ -44,7 +44,7 @@ const Article = ({donnees}) => {
             </div>
 
             <p className="hover:underline mb-5">
-                <Link href={`/article/${donnees.id}`} replace>
+                <Link href={`/actualites/${donnees.id}`} replace>
                     {(donnees.contenu).length > 250 ? (donnees.contenu).substring(0, 250) + '...' : donnees.contenu}
                 </Link>
             </p>
