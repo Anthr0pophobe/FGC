@@ -49,6 +49,10 @@ export default function Navbar({ userConnected }) {
               <Link href='/' replace>Accueil</Link>
             </span>
 
+            <span className={`${ router.pathname === '/actualites' ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
+              <Link href='/actualites' replace>Actualité</Link>
+            </span>
+
             <span className={`${ router.pathname === '/tournois' ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
               <Link href='/tournois' replace>Tournois</Link>
             </span>

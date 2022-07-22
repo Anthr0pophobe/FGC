@@ -21,20 +21,33 @@ ChartJS.register(
 
 import Logout from '../src/components/Logout';
 import { getCookies } from 'cookies-next';
- 
+import Article from '../src/components/Article';
+import useSWR from 'swr'
+import Link from 'next/link'
+
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 const index = () => {
 
+  const { data, error } = useSWR('http://localhost:3008/api/articles/', fetcher)
+  
+  const articles = data ? data.data.articles : 'none'
+
   console.log('index -> cookies = ',getCookies())
+  console.log('index -> data = ',data)
+  console.log('index -> articles = ',articles)
 
   return (
     <>
-    <body>
-      <h1>Home</h1>
-      
-
-      <Logout />
-    </body>
+    <div className='border-b border-b-[#0377FF] w-full h-fit mb-4  mt-5'>
+        <h2 className='p-1 text-xl'>Actualité</h2>
+    </div>
+    <div className='my-5 flex flex-wrap'>     
+      {articles !== 'none' ? articles.slice(0, 2).map((article) => <span className=''><Article donnees={article} /></span> ) : <div>Il n'y as aucun article</div>}
+    </div>
+    <Link href="/actualites" replace><button className='border-slate-300 border p-3 w-fit mb-5 hover:border-slate-500'>Plus d'articles</button></Link>
+    
     </>
   );
 }
