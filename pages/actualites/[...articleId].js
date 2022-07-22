@@ -10,10 +10,7 @@ const ArticleDetail = () => {
     const articleId = router.query.articleId
     const { data, error } = useSWR(`http://localhost:3008/api/articles/${articleId}`, fetcher)
     
-    console.log('detail -> data = ', data)
     const details = data && data.data
-
-    console.log('detail -> details = ', details)
 
     if(details) {
         var date = new Date(details.date)

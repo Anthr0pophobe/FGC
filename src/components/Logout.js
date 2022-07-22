@@ -7,6 +7,7 @@ export const Logout = () => {
     function deconnexion() {
         deleteCookie('email');
         deleteCookie('pseudo');
+        deleteCookie('userId')
     
         console.log('cookies= '+ getCookies())
         router.reload(router.pathname)

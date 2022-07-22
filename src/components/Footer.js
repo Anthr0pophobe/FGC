@@ -2,6 +2,7 @@ import Image from 'next/image'
 import dbz from '../../public/fighterz.png'
 import ggs from '../../public/ggs.png'
 import bros from '../../public/bros.png'
+import Logout from './Logout'
 
 export default function Footer() {
     
@@ -17,6 +18,7 @@ export default function Footer() {
             </div>
             <div className="text-center p-2 bg-[#000000]/[.2]">
                 © 2022 Tous droits réservés: Contrast
+                <Logout/>
             </div>
         </div>
     </footer>

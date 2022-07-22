@@ -14,7 +14,7 @@ const actualites = () => {
     return (
         <>
         <div className='my-5 flex flex-wrap'>
-                {articles !== 'none' ? articles.map((article) => <span className=''><Article donnees={article} /></span> ) : <div>pas article</div>}
+                {articles !== 'none' ? articles.map((article) =><Article key={article.id} donnees={article} /> ) : <div>pas article</div>}
         </div>
         </>
     );

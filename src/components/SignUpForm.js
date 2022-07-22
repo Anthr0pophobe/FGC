@@ -1,20 +1,28 @@
-import { render } from 'react-dom'
 import { useForm } from 'react-hook-form'
-import ReactDOM from 'react'
 import React from 'react'
+import Router from 'next/router'
+import { setCookie } from 'cookies-next';
+
 
 async function createUser(data) { // A FAIRE FONCTIONNER
+    
+    console.log(data)
     try {
         await fetch('http://localhost:3008/api/users/create', {
             method: 'POST',
-            body: JSON.stringify({data}),
-            headers: {'Content-Type': 'application/x-www-form-urlencoded' }
-        }) 
-    console.log(data)    
+            body: JSON.stringify(data),
+            headers: {"Access-Control-Allow-Origin": "*", 
+                         'Content-Type': 'application/json' }
+        })     
     } catch(erreur) {
-            console.log(erreur)
-            return false
-        }
+        console.log(erreur)
+        return false
+    }
+
+    setCookie('email', data.email)
+    setCookie('pseudo', data.pseudo)
+    setCookie('userId', data.id)
+    Router.push('/')
 }
 
 export const SignUpForm = ({users}) => {
@@ -23,7 +31,22 @@ export const SignUpForm = ({users}) => {
 
     const onSubmit = (data) => {      
         data.dateDeNaissance = new Date(data.dateDeNaissance)
-        data.dateDeNaissance.setHours(0,0,0,0)
+        function pad(number) {
+            var r = String(number);
+            if (r.length === 1) {
+              r = '0' + r;
+            }
+            return r;
+          }
+        
+        data.dateDeNaissance = data.dateDeNaissance.getUTCFullYear() +
+        '-' + pad(data.dateDeNaissance.getUTCMonth() + 1) +
+        '-' + pad(data.dateDeNaissance.getUTCDate()) +
+        'T' + pad(data.dateDeNaissance.getUTCHours()) +
+        ':' + pad(data.dateDeNaissance.getUTCMinutes()) +
+        ':' + pad(data.dateDeNaissance.getUTCSeconds()) +
+        '.' + String((data.dateDeNaissance.getUTCMilliseconds() / 1000).toFixed(3)).slice(2, 5) +
+        'Z';
         
         const alreadyExist = false
 
@@ -37,7 +60,7 @@ export const SignUpForm = ({users}) => {
             }
         })
 
-        if(!alreadyExist) createUser(data)
+        if(!alreadyExist) {console.log('sign -> submit = ', data); createUser(data)}
     }
 
     return (
@@ -111,7 +134,7 @@ export const SignUpForm = ({users}) => {
                 </div>
     
                 <div className="flex items-center justify-between">
-                    <input type="submit" value="Se connecter" className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                    <input type="submit" value="S'inscrire" className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
                     <a className="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-800" href="/login" >
                         Vous avez déjà un compte ? Connectez-vous
                     </a>

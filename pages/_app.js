@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   // La navbar est mise ici pour qu'elle apparaisse sur toutes les pages
   return (
     <div className='px-[10%] flex flex-col h-screen justify-between'>
-      <Navbar userConnected={user.pseudo} />
+      <Navbar userConnected={user.pseudo} userId={user.userId} />
       <Component {...pageProps} />
       <Footer />
     </div>

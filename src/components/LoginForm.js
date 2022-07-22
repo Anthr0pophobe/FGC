@@ -11,8 +11,9 @@ export const LoginForm = ({ users }) => {
 
         users.map((user) => {
             if(user.email === data.email && isSameHashValue(user.password, data.password) ) {
-                setCookie('email', user.email);
+                setCookie('email', user.email)
                 setCookie('pseudo', user.pseudo)
+                setCookie('userId', user.id)
                 Router.push('/')
             }
         });
@@ -22,7 +23,7 @@ export const LoginForm = ({ users }) => {
         <>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             <div id="input" className="flex flex-col w-full my-5">
-                <label for="email" className="text-gray-500 mb-2">Addrese email</label>
+                <label htmlFor="email" className="text-gray-500 mb-2">Addrese email</label>
                 <input placeholder="email" {...register("email", 
                 { required: true, maxLength: 30, pattern: "/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/" })}
                 type="text" id="email"
@@ -33,7 +34,7 @@ export const LoginForm = ({ users }) => {
             </div>
             
             <div id="input" className="flex flex-col w-full my-5">
-                <label for="password" className="text-gray-500 mb-2">Mot de passe</label>  
+                <label htmlFor="password" className="text-gray-500 mb-2">Mot de passe</label>  
                 <input type="password" placeholder="Mot de passe" id="password"
                 {...register("password", { required: true, maxLength: 30, minLength: 8, pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})" })}
                 className="border-slate-300 appearance-none border-2 border-gray-100 rounded-lg px-4 py-3 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-600 focus:shadow-lg"
@@ -49,7 +50,7 @@ export const LoginForm = ({ users }) => {
                             <div className="flex flex-row items-center justify-center">
                                 <div className="mr-2">
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
                                     </svg>
                                 </div>
                                 

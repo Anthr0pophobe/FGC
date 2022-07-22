@@ -21,8 +21,9 @@ const Article = ({donnees}) => {
     
     return data ? (
         <>
-        <article class="rounded-lg shadow-lg w-full p-4">
+        <article className="rounded-lg shadow-lg w-full p-4">
             <Link href={`/actualites/${donnees.id}`} replace>
+                <a>
                 <Image alt="Logo jeu" className="block h-auto w-full" src={donnees.titre.toLowerCase().includes("smash bros") && "/../public/bros.png"
                                                                             || donnees.titre.toLowerCase().includes("guilty gear") && "/../public/ggs.png"
                                                                             || donnees.titre.toLowerCase().includes("dragon ball") && "/../public/fighterz.png"} layout="intrinsic" width={donnees.titre.toLowerCase().includes("smash bros") && "100px"
@@ -30,6 +31,7 @@ const Article = ({donnees}) => {
                                                                                                                                                                                             || donnees.titre.toLowerCase().includes("dragon ball") && "200px"} height={donnees.titre.toLowerCase().includes("smash bros") && "100px"
                                                                                                                                                                                                                                                                         || donnees.titre.toLowerCase().includes("guilty gear") && "80px"
                                                                                                                                                                                                                                                                         || donnees.titre.toLowerCase().includes("dragon ball") && "80px"}/>
+                </a>
             </Link>
 
             <div className="flex items-center justify-between leading-tight p-2 md:p-4">

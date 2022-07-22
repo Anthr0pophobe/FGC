@@ -15,7 +15,7 @@ const login = () => {
                     <div className="flex flex-col w-full"> 
                         <h1 className="text-5xl text-gray-800 font-bold">Contrast</h1>
                         <p className="w-5/12 mx-auto md:mx-0 text-gray-500">
-                            Jouez, Gagnez, Partagez
+                            Jouez, Gagnez, Comparez
                         </p>
                     </div>
                     <div className="w-full md:w-full lg:w-9/12 mx-auto md:mx-0">
