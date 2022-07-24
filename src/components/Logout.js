@@ -14,7 +14,9 @@ export const Logout = () => {
     }
     
     return (
-        <button className="bg-red-400" onClick={deconnexion}>Se déconnecter</button>
+        <a onClick={deconnexion} className="mt-3 text-center inline-block align-baseline font-bold text-sm text-red-600 hover:text-red-900" href="/login" >
+                    Se déconnecter
+        </a>
     );
 }
 

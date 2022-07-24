@@ -46,13 +46,20 @@ export default function Navbar({ userConnected, userId }) {
             </div>
 
             <div className={`${ router.pathname .includes('/actualites') ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
-              <Link href='/actualites' replace>Actualité</Link>
+              <Link href='/actualites' replace>Actualités</Link>
             </div>
 
             <div className={`${ router.pathname.includes('/tournois') ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
               <Link href='/tournois' replace>Tournois</Link>
             </div>
-            
+
+            <div className={`${ router.pathname.includes('/joueurs') ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
+              <Link href='/joueurs' replace>Joueurs</Link>
+            </div>
+
+            <div className={`${ router.pathname.includes('/jeux') ? 'underline underline-offset-8 decoration-[#F79E05] text-white' : '' } lg:inline-flex lg:text-xl lg:w-auto w-full px-3 py-2 font-bold items-center justify-center hover:bg-navbar-color-hover hover:text-white hover:underline hover:underline-offset-8 decoration-[#F79E05]`}>
+              <Link href='/jeux' replace>Jeux</Link>
+            </div>
           </div>
 
           <div className='lg:ml-auto lg:mr-2 flex items-center'>                

@@ -4,46 +4,39 @@ import useSWR from 'swr'
 
 
 const Tournoi = ({donnees}) => {
-
-    console.log('tournoi -> donnees = ', donnees)
     
-    const dateDebut = new Date(donnees.dateDebut)
-    var y = dateDebut.getFullYear()
-    var m = dateDebut.getMonth()
-    m = ('0' + m).slice(-2)
+    if(donnees) {
+        const jours = ["Lundi", "Mardi", 'Mercredi', 'Jeudi', "Vendredi", "Samedi", "Dimanche"]
+        var mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
+        
+        const dateDebut = new Date(donnees.dateDebut)
+        const dayDb = jours[dateDebut.getDay()]
+        const moisDb = mois[dateDebut.getMonth()]
+        dateDebut = dayDb + ' '+ dateDebut.getDate() + ' ' + moisDb + ' ' + dateDebut.getFullYear()
 
-    var d = dateDebut.getDay()
-    d = ('0' + d).slice(-2)
-
-    dateDebut = y + '-' + m + '-' + d
-
-    const heureDebut = new Date(donnees.dateDebut)
-    var h = heureDebut.getHours()
-    var mi = heureDebut.getMinutes()
-
-    h = ('0' + h).slice(-2)
-    mi = ('0' + mi).slice(-2)
-
-    heureDebut = h + 'h' + mi
-
-    const dateFin = new Date(donnees.dateFin)
-    var y = dateFin.getFullYear()
-    var m = dateFin.getMonth()
-    m = ('0' + m).slice(-2)
-
-    var d = dateFin.getDay()
-    d = ('0' + d).slice(-2)
-
-    dateFin = y + '-' + m + '-' + d
-
-    const heureFin = new Date(donnees.dateFin)
-    var h = heureFin.getHours()
-    var mi = heureFin.getMinutes()
-
-    h = ('0' + h).slice(-2)
-    mi = ('0' + mi).slice(-2)
-
-    heureFin = h + 'h' + mi
+        const dateFin = new Date(donnees.dateFin)
+        const dayDf = jours[dateFin.getDay()]
+        const moisDf = mois[dateFin.getMonth()]
+        dateFin = dayDf + ' '+ dateFin.getDate() + ' ' + moisDf + ' ' + dateFin.getFullYear()
+    
+        const heureDebut = new Date(donnees.dateDebut)
+        var h = heureDebut.getHours()
+        var mi = heureDebut.getMinutes()
+    
+        h = ('0' + h).slice(-2)
+        mi = ('0' + mi).slice(-2)
+    
+        heureDebut = h + 'h' + mi
+    
+        const heureFin = new Date(donnees.dateFin)
+        var h = heureFin.getHours()
+        var mi = heureFin.getMinutes()
+    
+        h = ('0' + h).slice(-2)
+        mi = ('0' + mi).slice(-2)
+    
+        heureFin = h + 'h' + mi
+    }
 
     return donnees ? (
         <>
@@ -80,7 +73,7 @@ const Tournoi = ({donnees}) => {
             </p>
         </article>
         </>
-    ) : (<><div>none</div></>)
+    ) : (<><div>Loading...</div></>)
 }
 
 export default Tournoi

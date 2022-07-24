@@ -14,7 +14,7 @@ const Article = ({donnees}) => {
     var m = date.getMonth()
     m = ('0' + m).slice(-2)
 
-    var d = date.getDay()
+    var d = date.getDate()
     d = ('0' + d).slice(-2)
 
     date = y + '-' + m + '-' + d    
@@ -52,7 +52,7 @@ const Article = ({donnees}) => {
             </p>
         </article>
         </>
-    ) : (<><div>none</div></>)
+    ) : (<><div>Loading...</div></>)
 }
 
 export default Article
