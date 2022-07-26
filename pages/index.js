@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-import { getCookies } from 'cookies-next';
+import { deleteCookie, getCookies } from 'cookies-next';
 import Article from '../src/components/Article';
 import useSWR from 'swr'
 import Link from 'next/link'
@@ -32,6 +32,7 @@ const index = () => {
 
   const { data, error } = useSWR('http://localhost:3008/api/articles/', fetcher)
   const articles = data ? data.data.articles : 'none'
+
 
   return (
     <>

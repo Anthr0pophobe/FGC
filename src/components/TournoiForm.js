@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import Router from "next/router";
 
 
 async function createTour(data) { // A FAIRE FONCTIONNER
@@ -22,20 +23,79 @@ const TournoiForm = ({user}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const onSubmit = (data) => { 
-        console.log('tournoiformsubmit = ', data)
+        console.log('dateform= ', data.dateDebut)
         data.nbParticipants = parseInt(data.nbParticipants)
+        data.nom = (data.jeu).toUpperCase() + " - " + data.nom
+        data.email = user.email
+        data['ownerId'] = user.id
+        data['nbParticipants'] = 0
+        delete data.jeu
+        delete data.nomOwner
+        delete data.telephone
+        delete data.email
+
+        data.dateDebut = new Date(data.dateDebut)
+        function pad(number) {
+            var r = String(number);
+            if (r.length === 1) {
+              r = '0' + r;
+            }
+            return r;
+          }
         
+        data.dateDebut = data.dateDebut.getUTCFullYear() +
+        '-' + pad(data.dateDebut.getUTCMonth() + 1) +
+        '-' + pad(data.dateDebut.getUTCDate()) +
+        'T' + pad(data.dateDebut.getUTCHours()) +
+        ':' + pad(data.dateDebut.getUTCMinutes()) +
+        ':' + pad(data.dateDebut.getUTCSeconds()) +
+        '.' + String((data.dateDebut.getUTCMilliseconds() / 1000).toFixed(3)).slice(2, 5) +
+        'Z';
+
+        data.dateFin = new Date(data.dateFin)
+        function pad(number) {
+            var r = String(number);
+            if (r.length === 1) {
+              r = '0' + r;
+            }
+            return r;
+          }
+        
+        data.dateFin = data.dateFin.getUTCFullYear() +
+        '-' + pad(data.dateFin.getUTCMonth() + 1) +
+        '-' + pad(data.dateFin.getUTCDate()) +
+        'T' + pad(data.dateFin.getUTCHours()) +
+        ':' + pad(data.dateFin.getUTCMinutes()) +
+        ':' + pad(data.dateFin.getUTCSeconds()) +
+        '.' + String((data.dateFin.getUTCMilliseconds() / 1000).toFixed(3)).slice(2, 5) +
+        'Z';
+
+        createTour(data)
+        console.log('tournoiformsubmit = ', data)
     }  
 
+    function pad(number) {
+        var r = String(number);
+        if (r.length === 1) {
+          r = '0' + r;
+        }
+        return r;
+      }
+    // 2022-07-16T23:22
     const today = new Date()
-    var y = today.getFullYear()
-    var m = today.getMonth()
-    m = ('0' + m).slice(-2)
+    today = today.getUTCFullYear() +
+    '-' + pad(today.getUTCMonth() + 1) +
+    '-' + pad(today.getUTCDate()) +
+    'T' + pad(today.getUTCHours() + 2) +
+    ':' + pad(today.getUTCMinutes())
 
-    var d = today.getDate()
-    d = ('0' + d).slice(-2)
-
-    today = y + '-' + m + '-' + d 
+    const after = new Date()
+    after = after.getUTCFullYear() +
+    '-' + pad(after.getUTCMonth() + 1) +
+    '-' + pad(after.getUTCDate()) +
+    'T' + pad(after.getUTCHours() + 3) +
+    ':' + pad(after.getUTCMinutes())
+    console.log(after)
 
     return (
         <>
@@ -68,7 +128,7 @@ const TournoiForm = ({user}) => {
 
                     <div className='m-4'>
                         <label className='block text-gray-700 text-sm font-bold mb-2'>Date de début</label>
-                        <input type="datetime-local" defaultValue={today} {...register("dateDebut", { required: true})} 
+                        <input type="datetime-local" defaultValue={today} min={today} {...register("dateDebut", { required: true})} 
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                         
                         {errors.dateDebut?.type === 'required' && <div className="errorForm">Vous devez sélectionner la date de début !</div> }
@@ -76,47 +136,10 @@ const TournoiForm = ({user}) => {
 
                     <div className='m-4'>
                         <label className='block text-gray-700 text-sm font-bold mb-2'>Date de fin</label>
-                        <input type="datetime-local" defaultValue={today} {...register("dateFin", { required: true})} 
+                        <input type="datetime-local" defaultValue={after} min={after} {...register("dateFin", { required: true})} 
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                         
                         {errors.dateFin?.type === 'required' && <div className="errorForm">Vous devez sélectionner la date de fin !</div> }
-                    </div>
-                </div>
-
-                <div className='w-full'>
-                    <div className='m-4'>
-                        <label className='block text-gray-700 text-sm font-bold mb-2'>Pseudo de l'organisateur</label>
-                        <input placeholder="Nom" defaultValue={user.pseudo}
-                        {...register("nomOwner", { required: true, maxLength: 50, minLength: 2, pattern: "/^[a-zA-Z]+$/" })} 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-                        
-                        {errors.nomOwner?.type === 'required' && <div className="errorForm">Vous devez entrer un votre nom !</div> }
-                        {errors.nomOwner?.pattern && <div className="errorForm">Votre nom est invalide !</div> }
-                        {(errors.nomOwner?.minLength && errors.nomOwner?.maxLength ) && <div className="errorForm">Le nom doit être compris entre 2 et 50 caractères !</div>}
-                    </div>
-
-                    <div className='m-4'>
-                        <label className='block text-gray-700 text-sm font-bold mb-2'>Numéro de téléphone de l'organisateur</label>
-                        <input type="tel" placeholder="Téléphone" 
-                        {...register("telephone", { required: true, maxLength: 12, minLength: 10, pattern: "/^[0-9]+$/" })} 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-                        
-                        {errors.telephone?.type === 'required' && <div className="errorForm">Vous devez entrer votre numéro de téléphone !</div> }
-                        {(errors.telephone?.minLength && errors.telephone?.maxLength && errors.telephone?.pattern) && <div className="errorForm">Votre numéro de téléphone est invalide !</div> }
-                    </div>
-
-                    <div className='m-4'>
-                        <label className='block text-gray-700 text-sm font-bold mb-2'>Addresse mail de l'organisateur</label>
-                        <input type="email" placeholder="Adresse email"  defaultValue={user.email}
-                        {...register("email", { required: true, maxLength: 30, pattern: "/^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/" })} 
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-                        
-                        {errors.email?.type === 'required' && <div className="errorForm">Vous devez saisir votre email !</div>}
-                        {(errors.email?.maxLength && errors.email?.pattern) && <div className="errorForm">L'adresse email entrer n'est pas valide !</div>}
-                    </div>
-
-                    <div className='hidden'>
-                        <input type="number" value="0" {...register("nbParticipants") }></input>
                     </div>
                 </div>
             </div>

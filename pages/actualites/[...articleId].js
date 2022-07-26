@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import useSWR from 'swr'
 import Image from "next/image";
 import Router from "next/router";
+import { getCookie } from "cookies-next";
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -28,15 +29,42 @@ const ArticleDetail = () => {
     function retour() {
         Router.replace('/actualites')
     }
+    async function deleteArticle() {
+        try {
+            await fetch(`http://localhost:3008/api/articles/delete${articleId}`, {
+                method: 'DELETE',
+                headers: {"Access-Control-Allow-Origin": "*" }
+            })     
+        } catch(erreur) {
+            console.log(erreur)
+            return false
+        }
+
+        Router.replace('/actualites')
+    }
+
+    console.log('cookie = ',getCookie('userId'))
     
     return details ? (
         <>
+        {parseInt(getCookie('userId')) === details.userId ? 
+            <div id="button" className="flex flex-col">
+                <button type="button" onClick={deleteArticle} className="w-fit p-2 bg-orange text-white hover:bg-[#5D63D1]/[.9] rounded-lg mt-4" >
+                            <div className="flex flex-row items-center justify-center">
+                                <div className="mr-2 flex">
+                                    Supprimer votre article
+                                </div>
+                            </div>
+                </button>
+            </div>
+         : <div></div>}
+
         <div id="button" className="flex flex-col">
-            <button type="button" onClick={retour} className="w-fit p-2 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg" >
+            <button type="button" onClick={retour} className="w-fit p-2 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg mt-4" >
                         <div className="flex flex-row items-center justify-center">
                             <div className="mr-2 flex">
                                 <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-lidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" ></path>
                                 </svg>
                                 Retour
                             </div>
@@ -44,7 +72,7 @@ const ArticleDetail = () => {
             </button>
         </div>
 
-        <article class="rounded-lg shadow-lg w-full p-4 mb-5 text-center">
+        <article className="rounded-lg shadow-lg w-full p-4 mb-5 text-center">
             <Image alt="Logo jeu" src={details.titre.toLowerCase().includes("smash bros") && "/../public/bros.png"
                                                                             || details.titre.toLowerCase().includes("guilty gear") && "/../public/ggs.png"
                                                                             || details.titre.toLowerCase().includes("dragon ball") && "/../public/fighterz.png"} width={details.titre.toLowerCase().includes("smash bros") && "250px"

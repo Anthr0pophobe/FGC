@@ -1,10 +1,11 @@
 import useSWR from 'swr'
 import { getCookie } from "cookies-next";
+import FinTournoi from "./FinTournoi";
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
-const BoutonRegister = ({donneesTournoi}) => {
+const BoutonRegister = ({donneesTournoi, idJeu}) => {
 
     const userId = getCookie('userId')
     const tournoiId = donneesTournoi.id
@@ -13,16 +14,37 @@ const BoutonRegister = ({donneesTournoi}) => {
 
     if(userId) {const { data, error } = useSWR(`http://localhost:3008/api/users/${userId}`, fetcher)}
 
-    async function registerTournoi() {
+    async function addParticipant() {
         try {
-            await fetch(`http://localhost:3008/api/users/${userId}/register/${tournoiId}`, {
-                method: 'POST',
-                headers: {"Access-Control-Allow-Origin": "*"}
+            console.log('ddd = ',donneesTournoi)
+            const part = parseInt(donneesTournoi.nbParticipants) + 1
+            console.log('cccc = ',part)
+            await fetch(`http://localhost:3008/api/tournois/${tournoiId}/update`, {
+                method: 'PUT',
+                body: JSON.stringify({
+                    "nbParticipants": part
+                }),
+                headers: {"Access-Control-Allow-Origin": "*",'Content-Type': 'application/json'}
             })     
         } catch(erreur) {
             console.log(erreur)
             return false
         }  
+    }
+
+    async function registerTournoi() {
+        try {
+            await fetch(`http://localhost:3008/api/users/${userId}/register/${tournoiId}`, {
+                method: 'PUT',
+                headers: {"Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json'}
+            })     
+        } catch(erreur) {
+            console.log(erreur)
+            return false
+        }  
+
+        addParticipant()
     }
 
     
@@ -34,11 +56,21 @@ const BoutonRegister = ({donneesTournoi}) => {
         })
     }
 
+    let dateFin = donneesTournoi && new Date(donneesTournoi.dateFin)
+    let dateActuel = new Date()
+    let fini = false
+
+    if(dateActuel >= dateFin) {
+        fini = true
+    }
+
     return (data && donneesTournoi) ? (
         <>
-        {userAlready ? <div className='text-green-600 text-center font-bold border border-slate-300 p-3'>
-                            Vous êtes déjà inscrit à ce tournoi<br/>Vous devez envoyer votre pseudo in-game par mail à l'organisateur en précisant votre pseudo Contrast
+        {(userAlready && !fini) ? <div className='text-green-600 text-center font-bold border border-slate-300 p-3'>
+                            Vous êtes inscrit à ce tournoi<br/>Vous devez envoyer votre pseudo in-game par mail à l'organisateur en précisant votre pseudo Contrast
                         </div>
+        : (userAlready && fini) ? <FinTournoi tournoi={donneesTournoi} jeuId={idJeu} user={data.data}/>
+        : fini ? <div className='text-red-600 text-center font-bold border border-slate-300 p-3 mb-5'>Le tournoi est terminer</div>
         : <div id="button" className="flex flex-col p-5">
             <button onClick={registerTournoi} type="button" className="w-fit p-4 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg" >
                         <div className="flex flex-row items-center justify-center">

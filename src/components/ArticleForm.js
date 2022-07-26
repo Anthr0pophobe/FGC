@@ -33,7 +33,6 @@ const ArticleForm = () => {
     const dateCrea = y + '-' + m + '-' + d 
 
     const onSubmit = (data) => {    
-        console.log('sadzd')  
         data.date = new Date(data.date)
         function pad(number) {
             var r = String(number);
@@ -82,7 +81,7 @@ const ArticleForm = () => {
                 {(errors.contenu?.minLength && errors.contenu?.maxLength ) && <div className="errorForm">Le contenu doit être compris entre 2 et 10000 caractères !</div>}
             </div>
 
-            <div className=''>
+            <div className='hidden'>
                 <input type="date" value={dateCrea} defaultValue={dateCrea}
                 {...register("date")} />
             </div>

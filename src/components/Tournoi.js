@@ -43,16 +43,19 @@ const Tournoi = ({donnees}) => {
         <article className="rounded-lg shadow-lg w-fit p-4 flex flex-col justify-center items-center m-5">
             <Link href={`/tournois/${donnees.id}`} replace>
                 <a>
-                <Image alt="Logo jeu" className="block h-auto w-full" src={donnees.nom.includes('SSBU') && "/../public/bros.png"
-                                                                            || donnees.nom.includes('GGS') && "/../public/ggs.png"
-                                                                            || donnees.nom.includes('DBFZ') && "/../public/fighterz.png"} 
-                                                                    layout="intrinsic" 
-                                                                    width={donnees.nom.includes("SSBU") && "100px"
-                                                                            || donnees.nom.includes("GGS") && "350px"
-                                                                            || donnees.nom.includes("DBFZ") && "200px"} 
-                                                                    height={donnees.nom.includes("SSBU") && "100px"
-                                                                            || donnees.nom.includes("GGS") && "80px" 
-                                                                            || donnees.nom.includes("DBFZ") && "80px"} />
+                <Image alt="Logo jeu" className="block h-auto w-full" src={donnees.nom.toUpperCase().includes('SSBU') && "/../public/bros.png"
+                                                                            || donnees.nom.toUpperCase().includes('GGS') && "/../public/ggs.png"
+                                                                            || donnees.nom.toUpperCase().includes('DBFZ') && "/../public/fighterz.png"
+                                                                            || ""} 
+                                                                    layout="intrinsic" priority
+                                                                    width={donnees.nom.toUpperCase().includes("SSBU") && "100px"
+                                                                            || donnees.nom.toUpperCase().includes("GGS") && "350px"
+                                                                            || donnees.nom.toUpperCase().includes("DBFZ") && "200px"
+                                                                            || ""} 
+                                                                    height={donnees.nom.toUpperCase().includes("SSBU") && "100px"
+                                                                            || donnees.nom.toUpperCase().includes("GGS") && "80px" 
+                                                                            || donnees.nom.toUpperCase().includes("DBFZ") && "80px"
+                                                                            || ""} />
                 </a>
             </Link>
 

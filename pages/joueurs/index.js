@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import { useRef, useState } from "react";
-import Statistiques from '../../src/components/Statistiques';
+import CardJoueur from '../../src/components/CardJoueur';
+import Link from 'next/link';
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -42,12 +43,12 @@ const joueurs = () => {
         </div>
 
         {!userSearch ? <div className='my-5 flex flex-wrap justify-around'>
-                            {users !== 'none' && users.map((user) => <Statistiques key={user.id} user={user} />)}
+                            {users !== 'none' && users.map((user) => <CardJoueur key={user.id} user={user} />)}
                         </div>
                         : <div className='my-5 flex flex-wrap justify-around'>
                             {users !== 'none' ? users.map((user) => {
                                                                     if( user.pseudo.toLowerCase().includes(userSearch.toLowerCase()) ) 
-                                                                        return <Statistiques key={user.id} user={user} />   
+                                                                        return <CardJoueur key={user.id} user={user} />
                                                                 }) 
                                                 : <div>Aucun utilisateur n'as été trouver</div>}
                         </div>}

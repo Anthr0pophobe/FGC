@@ -3282,6 +3282,18 @@ address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.2.0.tgz#d352a62c92fee90f89a693eccd2a8b2139ab02d9"
   integrity sha512-tNEZYz5G/zYunxFm7sfhAxkXEuLj3K6BKwv6ZURlsF6yiUQ65z0Q2wZW9L5cPUl9ocofGvXOdFYbFHp0+6MOig==
 
+ag-charts-community@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/ag-charts-community/-/ag-charts-community-6.0.2.tgz#cd87d22d810ec7016ae0159d16cca9342bc47196"
+  integrity sha512-uEFCeaOA510OrYhZ4rTZxP7qihZ+mlmlW9IO8LLgcRHy5Aj3AXq0w6DQolPIIjJK7WvN7wbjCLwadGrMqP6q6g==
+
+ag-charts-react@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/ag-charts-react/-/ag-charts-react-6.0.0.tgz#0c56b3d4004187a764f9900c93ebf0a6413591f0"
+  integrity sha512-7NzT2FYUXozrA4mQRCmHnxfBzTrZIcx7gGBwCfS9NFGpCztYx7KW+bPKGTMhDSfxxKOHhDSyK3P6RvvRIs3BGg==
+  dependencies:
+    prop-types "^15.6.2"
+
 aggregate-error@^3.0.0, aggregate-error@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/aggregate-error/-/aggregate-error-3.1.0.tgz#92670ff50f5359bdb7a3e0d40d0ec30c5737687a"
@@ -9601,6 +9613,11 @@ react-is@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-minimal-pie-chart@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/react-minimal-pie-chart/-/react-minimal-pie-chart-8.3.0.tgz#cf6de3d712ea07e87e404276cbb811143ca00682"
+  integrity sha512-ICot74PGPrmGkaie8O+5tRZ5ivukYQ3fRN5ppvw1J01sIa5tHO9cekakyv9nXUkxKifiKn/FQu5uWHfSD39mRQ==
 
 react-refresh@0.8.3:
   version "0.8.3"

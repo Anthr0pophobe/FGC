@@ -1,59 +1,37 @@
-const data = {
-    persoJouer: [
+const dataJoueurs = [
         {
-            id: 1,
-            userId: 4, // Jordan
-            persoId: 13, // Rondoudou
-            nbVictoire: 0,
-            nbDefaite: 0,
-            nbMatchNul: 0
+        "nbPartie":  0,
+        "nbVictoire":  0,
+        "nbDefaite":  0,
+        "nbEgalite": 0,
+        "pseudo": "Ludal",
+        "userId": 1
         },
         {
-            id: 2,
-            userId: 4, // Jordan
-            persoId: 4, // Samus
-            nbVictoire: 0,
-            nbDefaite: 0,
-            nbMatchNul: 0
+        "nbPartie":  0,
+        "nbVictoire":  0,
+        "nbDefaite":  0,
+        "nbEgalite": 0,
+        "pseudo": "Speedi",
+        "userId": 2
         },
         {
-            id: 3,
-            userId: 2, // Edouard
-            persoId: 1, // Mario
-            nbVictoire: 0,
-            nbDefaite: 0,
-            nbMatchNul: 0
+        "nbPartie":  0,
+        "nbVictoire":  0,
+        "nbDefaite":  0,
+        "nbEgalite": 0,
+        "pseudo": "Anthro",
+        "userId": 3
         },
         {
-            id: 4,
-            userId: 3, // Khais
-            persoId: 3, // Link
-            nbVictoire: 0,
-            nbDefaite: 0,
-            nbMatchNul: 0
-        }
-    ],
-
-    personnages: [
-        {
-            id: 4,
-            nom: "Samus"
-        },
-        {
-            id: 13,
-            nom:"Rondoudou"
-        },
-        {
-            id: 3,
-            nom: "Link"
-        },
-        {
-            id: 1,
-            nom: "Mario"
+        "nbPartie":  0,
+        "nbVictoire":  0,
+        "nbDefaite":  0,
+        "nbEgalite": 0,
+        "pseudo": "LeSaligaud",
+        "userId": 4
         }
     ]
-}
-    
 
 
-export default data
+export default dataJoueurs

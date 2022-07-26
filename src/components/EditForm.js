@@ -6,9 +6,10 @@ import useSWR from 'swr'
 
 async function updatetUser(data) { // A FAIRE FONCTIONNER
     console.log('datasubmit = ', data)
+    const id = parseInt(getCookie('userId'))
     
     try {
-        await fetch(`http://localhost:3008/api/users/4/update`, {
+        await fetch(`http://localhost:3008/api/users/${id}/update`, {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {"Access-Control-Allow-Origin": "*", 
