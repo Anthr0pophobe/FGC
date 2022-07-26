@@ -27,16 +27,24 @@ export const SignUpForm = ({users}) => {
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {      
+    function pad(number) {
+        var r = String(number);
+        if (r.length === 1) {
+          r = '0' + r;
+        }
+        return r;
+      }
+
+        let today = new Date()
+        today = today.getUTCFullYear() +
+        '-' + pad(today.getUTCMonth() + 1) +
+        '-' + pad(today.getUTCDate()) +
+        'T' + pad(today.getUTCHours() + 1) +
+        ':' + pad(today.getUTCMinutes())
+
+    const onSubmit = (data) => {    
+
         data.dateDeNaissance = new Date(data.dateDeNaissance)
-        function pad(number) {
-            var r = String(number);
-            if (r.length === 1) {
-              r = '0' + r;
-            }
-            return r;
-          }
-        
         data.dateDeNaissance = data.dateDeNaissance.getUTCFullYear() +
         '-' + pad(data.dateDeNaissance.getUTCMonth() + 1) +
         '-' + pad(data.dateDeNaissance.getUTCDate()) +
@@ -124,8 +132,8 @@ export const SignUpForm = ({users}) => {
 
                 <div className='mb-4'>
                     <label className='block text-gray-700 text-sm font-bold mb-2'>Date de naissance</label>
-                    <input type="date" placeholder="Date de naissance" 
-                    {...register("dateDeNaissance", { required: true, maxLength: 255 })} 
+                    <input type="date" placeholder="Date de naissance" max={today}
+                    {...register("dateDeNaissance", { required: true })} 
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
                     
                     {errors.dateDeNaissance?.type === 'required' && <div className="errorForm">Vous devez sélectionner votre date de naissance !</div> }

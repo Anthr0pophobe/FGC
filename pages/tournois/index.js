@@ -44,7 +44,7 @@ const tournois = () => {
                 />
             </div>
 
-            {getCookie('userId') ? <div id="button" className='mt-5'>
+            {getCookie('userId') ? <div id="button">
                                     <Link href='/tournois/createTournoi' replace>
                                         <button type="button" className="w-fit p-2 bg-blue text-white hover:bg-[#5D63D1]/[.9] rounded-lg" >
                                                     <div className="flex flex-row items-center justify-center">

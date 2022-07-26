@@ -15,15 +15,10 @@ const ArticleDetail = () => {
     const details = data && data.data
 
     if(details) {
+        var mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
         var date = new Date(details.date)
-        var y = date.getFullYear()
-        var m = date.getMonth()
-        m = ('0' + m).slice(-2)
-
-        var d = date.getDay()
-        d = ('0' + d).slice(-2)
-
-        date = y + '-' + m + '-' + d 
+        const moisDb = mois[date.getMonth()]
+        date = date.getDate() + ' ' + moisDb + ' ' + date.getFullYear()
     }
 
     function retour() {
@@ -82,9 +77,11 @@ const ArticleDetail = () => {
                                                                                                                                                                                                                                                     || details.titre.toLowerCase().includes("dragon ball") && "80px"}/>
 
             <h1 className="text-xl font-bold mb-1">{details.titre}</h1>
-            <p className="mb-7">Ecrit le {details.date.substring(0,10)}</p>
+            <p className="mb-7">Ecrit le {date}</p>
 
-            <p>{details.contenu}</p>
+            <p className="text-justify">{details.contenu.slice(0, details.contenu.indexOf('.',500) + 1)}</p>
+            <br/>
+            <p className="text-justify">{details.contenu.slice(details.contenu.indexOf('.',500) + 1)}</p>
 
         </article>
         

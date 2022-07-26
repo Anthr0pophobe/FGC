@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import Router from "next/router";
 
 
-async function createTour(data) { // A FAIRE FONCTIONNER
+async function createTour(data) {
     try {
         await fetch('http://localhost:3008/api/tournois/create', {
             method: 'POST',
@@ -27,7 +27,7 @@ const TournoiForm = ({user}) => {
         data.nbParticipants = parseInt(data.nbParticipants)
         data.nom = (data.jeu).toUpperCase() + " - " + data.nom
         data.email = user.email
-        data['ownerId'] = user.id
+        data['ownerId'] = (user.id <= 4 && user.id >=1) ? user.id : 1
         data['nbParticipants'] = 0
         delete data.jeu
         delete data.nomOwner
